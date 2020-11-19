@@ -16,14 +16,16 @@ steps:
     scriptType: inlineScript
     #scriptPath: # Optional
     inline: |
-      echo $null >> c:\test.txt
       # Get file from remote storage account using SAS token.
       $StorageAccountName = ${env:storageAccountName}
       $ContainerName = ${env:containerName}
       $environment='AzureCloud'
+      echo $ContainerName
+      echo $environment
 
       ## Create a storage context
       $sasToken = ${env:sasToken}
+      echo $sasToken
       $StorageContext = New-AzStorageContext $StorageAccountName -SasToken $sasToken -Environment $environment
 
       #Download a file
