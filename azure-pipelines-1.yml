@@ -13,9 +13,10 @@ steps:
 - task: AzurePowerShell@4
   inputs:
     azureSubscription: $(azureSubscription)
-    scriptType: inlineScript # Optional. Options: filePath, inlineScript
+    scriptType: inlineScript
     #scriptPath: # Optional
     inline: |
+      echo $null >> c:\test.txt
       # Get file from remote storage account using SAS token.
       $StorageAccountName = ${env:storageAccountName}
       $ContainerName = ${env:containerName}
