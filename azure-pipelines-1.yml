@@ -12,7 +12,7 @@ pool:
 steps:
 - task: AzurePowerShell@4
   inputs:
-    azureSubscription: $(azureSubscription) Required. Name of Azure Resource Manager service connection
+    azureSubscription: $(azureSubscription)
     scriptType: inlineScript # Optional. Options: filePath, inlineScript
     #scriptPath: # Optional
     inline: |
