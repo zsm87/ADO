@@ -22,8 +22,7 @@ steps:
       $environment='AzureCloud'
 
       ## Create a storage context
-      $sasToken = ${env:sasToken}
-      $StorageContext = New-AzStorageContext $StorageAccountName -SasToken $sasToken -Environment $environment
+      $StorageContext = New-AzStorageContext $StorageAccountName -SasToken ${sasToken} -Environment $environment
 
       #Download a file
       $storageContainer = Get-AzStorageContainer -Name $ContainerName -Context $StorageContext
