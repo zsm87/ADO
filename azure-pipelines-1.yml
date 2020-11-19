@@ -20,12 +20,9 @@ steps:
       $StorageAccountName = ${env:storageAccountName}
       $ContainerName = ${env:containerName}
       $environment='AzureCloud'
-      echo $ContainerName
-      echo $environment
 
       ## Create a storage context
       $sasToken = ${env:sasToken}
-      echo $sasToken
       $StorageContext = New-AzStorageContext $StorageAccountName -SasToken $sasToken -Environment $environment
 
       #Download a file
