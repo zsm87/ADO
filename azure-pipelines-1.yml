@@ -1,0 +1,35 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+pool:
+  name: 'cn_test'
+
+steps:
+- task: AzurePowerShell@4
+  inputs:
+    azureSubscription: $(azureSubscription) Required. Name of Azure Resource Manager service connection
+    scriptType: inlineScript # Optional. Options: filePath, inlineScript
+    #scriptPath: # Optional
+    inline: |
+      # Get file from remote storage account using SAS token.
+      $StorageAccountName = ${env:storageAccountName}
+      $ContainerName = ${env:containerName}
+      $environment='AzureCloud'
+
+      ## Create a storage context
+      $sasToken = ${env:sasToken}
+      $StorageContext = New-AzStorageContext $StorageAccountName -SasToken $sasToken -Environment $environment
+
+      #Download a file
+      $storageContainer = Get-AzStorageContainer -Name $ContainerName -Context $StorageContext
+      $storageContainer | Get-AzStorageBlobContent -Blob "StorageAccount/azuredeploy.json" -Destination "C:\"
+    #scriptArguments: # Optional
+    #errorActionPreference: 'stop' # Optional. Options: stop, continue, silentlyContinue
+    #failOnStandardError: false # Optional
+    azurePowerShellVersion: latestVersion # Required. Options: latestVersion, otherVersion
+    #preferredAzurePowerShellVersion: # Required when azurePowerShellVersion == OtherVersion
