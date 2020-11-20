@@ -11,6 +11,8 @@ pool:
 
 steps:
 - task: AzurePowerShell@4
+  env:
+    SasToken: $(sasToken)
   inputs:
     azureSubscription: $(azureSubscription)
     scriptType: inlineScript
