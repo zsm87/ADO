@@ -23,8 +23,8 @@ variables:
 steps:
 - pwsh: |
     echo "${SrcContainerUri}${SrcBlobName}"
-    echo "$DestContainerUri$DestBlobName"
-    azcopy copy "$SrcContainerUri$SrcBlobName${env:SrcSasToken}" "$DestContainerUri$DestBlobName${env:DestSasToken}"
+    echo "$(DestContainerUri)$(DestBlobName)"
+    azcopy copy "$(SrcContainerUri)$(SrcBlobName)${env:SrcSasToken}" "$(DestContainerUri)$(DestBlobName)${env:DestSasToken}"
   env:
     SrcSaasToken: $(SrcSasToken)
     DestSasToken: $(DestSasToken)
