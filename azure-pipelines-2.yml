@@ -1,0 +1,28 @@
+# 1. Copy blob from US/EU to China storage account
+#   a. Prerequisites
+#     i. Storage account in China
+#     ii. Service connection
+#     iii. Input info from VWAC US/EU as below
+#   b. Inputs: 
+#     i. blob info for both source and destination storage accounts and containers.
+#   c. Outputs / artifacts
+# Do we need a template or not? Probably no.
+
+trigger:
+- none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  $SrcContainerUri: 'https://corechinatestingsa.blob.core.windows.net/images/'
+  $SrcBlobName: 'build-agent-snapshot.vhd'
+  $DestContainerUri: 'https://adostorage.blob.core.chinacloudapi.cn/images/'
+  $DestBlobName: 'test.vhd'
+
+steps:
+- pwsh: "azcopy $SrcContainerUri$SrcBlobName$(env:SrcSasToken) $DestContainerUri$DestBlobName$(env:DestSasToken)"
+  env: {
+    $(SrcSasToken)
+    $(DestSasToken)
+  }
