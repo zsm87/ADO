@@ -22,7 +22,7 @@ variables:
 
 steps:
 - pwsh: |
-    azcopy copy "$SrcContainerUri$SrcBlobName${env:SrcSasToken}" "$DestContainerUri$DestBlobName${env:DestSasToken}
+    azcopy copy "$SrcContainerUri$SrcBlobName${env:SrcSasToken}" "$DestContainerUri$DestBlobName${env:DestSasToken}"
   env:
     SrcSaasToken: $(SrcSasToken)
     DestSasToken: $(DestSasToken)
