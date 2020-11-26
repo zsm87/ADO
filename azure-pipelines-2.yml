@@ -21,7 +21,7 @@ variables:
   $DestBlobName: 'test.vhd'
 
 steps:
-- pwsh: "azcopy $SrcContainerUri$SrcBlobName$(env:SrcSasToken) $DestContainerUri$DestBlobName$(env:DestSasToken)"
+- pwsh: "azcopy $SrcContainerUri$SrcBlobName${env:SrcSasToken} $DestContainerUri$DestBlobName${env:DestSasToken}"
   env: {
     $(SrcSasToken)
     $(DestSasToken)
