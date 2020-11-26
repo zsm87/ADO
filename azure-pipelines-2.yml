@@ -15,17 +15,13 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  $SrcContainerUri: 'https://corechinatestingsa.blob.core.windows.net/images/'
-  $SrcBlobName: 'build-agent-snapshot.vhd'
-  $DestContainerUri: 'https://adostorage.blob.core.chinacloudapi.cn/images/'
-  $DestBlobName: 'test.vhd'
+  SrcContainerUri: 'https://corechinatestingsa.blob.core.windows.net/images/'
+  SrcBlobName: 'build-agent-snapshot.vhd'
+  DestContainerUri: 'https://adostorage.blob.core.chinacloudapi.cn/images/'
+  DestBlobName: 'test.vhd'
 
 steps:
 - pwsh: |
-    echo "$SrcContainerUri$SrcBlobName"
-    Write-Host "$DestContainerUri$DestBlobName"
-    echo $env:SrcSasToken
-    Write-Host $env:DestSasToken
     azcopy copy "$SrcContainerUri$SrcBlobName${env:SrcSasToken}" "$DestContainerUri$DestBlobName${env:DestSasToken}"
   env:
     SrcSaasToken: $(SrcSasToken)
